@@ -1,0 +1,74 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColConfianza</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    
+</head>
+<body>
+        <nav>
+           <a href="index.html" class="logo">
+            <img src="img/logoCol.jpeg" alt="ColConfianza">
+           </a>
+
+            <ul>
+                 <li><a href="index.html">Inicio</a></li>
+                <li><a href="about.html">Nosotros</a></li>
+                <li><a href="dashboard.html">Datos</a></li>
+            </ul>
+               
+              
+        
+        <a class="btn-cta" href="contact.html">Contáctanos</a>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-content">
+            <h1>Inovacion agricola con confianza y tecnologia </h1>
+            <p> Impulsamos el futuro del agro con soluciones inteligentes</p>
+            <a class="btn-ns" href="services.html">Nuestros Servicios</a>
+            </div>
+            <div class="hero-image">
+                <img src="img/heroimg.jpg" alt="Agricultura inteligente">
+            </div>
+
+        </section>
+        
+        </div>
+        <section class="servicios">
+            <div class="servicios-content">
+            <div class="servicios-card">
+               <img src="img/asesoria.png" alt="Asesoría agrícola">
+                <h3> Asesoria agricola</h3>
+                <p> Optimizamos tu producción agrícola con tecnología.</p>
+            </div>
+         
+            <div class="servicios-card">
+                <img src="img/monitor.png" alt="Monitoreo de cultivos">
+                <h3> Monitoreo de cultivos</h3>
+                <p> Sensores y analisis de cultivos</p>
+                
+            </div>
+            <div class="servicios-card">
+                <img src="img/icono1.png"alt="Soluciones agrícolas">
+            <h3>Soluciones Agrícolas</h3>
+            <p>Tecnologia para un agro sostenible </p>
+            </div>
+
+            </div>
+
+
+            
+           
+        </section>
+        <script>
+            fetch ("http://127.0.0.1:8000/produccion")
+            .then(res=> res.json())
+            .then(data =>{
+                console.log("Datos cargados:", data.length, "registros");
+            })
+        </script>
+
+    </body>

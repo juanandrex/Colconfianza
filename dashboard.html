@@ -1,0 +1,35 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Agrícola - ColConfianza</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="img/logoCol.jpeg" alt="ColConfianza">
+        </a>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="about.html">Nosotros</a></li>
+            <li><a href="dashboard.html">Datos</a></li>
+        </ul>
+        <a class="btn-cta" href="contact.html">Contáctanos</a>
+    </nav>
+
+    <section class="dashboard">
+        <h2>Provincia de Almeidas</h2>
+        <select id="selector-municipio">
+            <option value="">Selecciona un municipio</option>
+        </select>
+        <div id="resultados"></div>
+        <canvas id="grafica" style="margin-top: 40px;"></canvas>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
