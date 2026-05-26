@@ -22,6 +22,7 @@
               
         
         <a class="btn-cta" href="contact.html">Contáctanos</a>
+
         </nav>
 
         <section class="hero">
@@ -64,11 +65,44 @@
            
         </section>
         <script>
-            fetch ("http://127.0.0.1:8000/produccion")
-            .then(res=> res.json())
-            .then(data =>{
-                console.log("Datos cargados:", data.length, "registros");
-            })
+           const form = document.getElementById('contact-form');
+    const messageEl = document.getElementById('form-message');
+
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        
+        // Crear el objeto con los datos
+        const payload = {
+            nombre: document.getElementById('nombre').value,
+            email: document.getElementById('email').value,
+            telefono: document.getElementById('telefono').value,
+            mensaje: document.getElementById('mensaje').value
+        };
+
+        try {
+            const response = await fetch('guardar.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload) // Convertimos el objeto a JSON
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                messageEl.textContent = result.message;
+                messageEl.style.color = '#1f7a1f';
+                form.reset();
+            } else {
+                messageEl.textContent = 'Error: ' + result.message;
+                messageEl.style.color = '#d00000';
+            }
+        } catch (error) {
+            messageEl.textContent = 'Error de conexión: ' + error.message;
+            messageEl.style.color = '#d00000';
+        }
+    });
         </script>
 
     </body>
