@@ -1,19 +1,5 @@
-fetch ("http://127.0.0.1:8000/municipios")
-.then(res => res.json())
-.then(data =>{
-    const selector = document.getElementById("selector-municipio");
-    data.municipios.forEach(municipio => {
-        const option =document.createElement("option");
-        option.value =municipio
-        option.textContent =municipio
-        selector.appendChild(option);
-    })
-    selector.addEventListener("change",function(){
-        
-        fetch("http://127.0.0.1:8000/produccion/" + selector.value)
-        .then(res => res.json())
-        .then(data =>{
-            const tabla=document.createElement("table");
+        function mostrarResultados(data){
+                         const tabla=document.createElement("table");
             const encabezado = document.createElement("tr");
             const th1 = document.createElement("th");
             th1.textContent = "Cultivo";
@@ -58,11 +44,48 @@ fetch ("http://127.0.0.1:8000/municipios")
                 type: "line",
                 data: {labels: años, datasets: dataset}
         })
+        const selectorCultivo = document.getElementById("selector-cultivo")
+    selectorCultivo.innerHTML = '<option value="">Selecciona un cultivo</option>'
+    cultivos.forEach(cultivo => {
+    const option = document.createElement("option")
+    option.value = cultivo
+    option.textContent = cultivo
+    selectorCultivo.appendChild(option)
+})
+            }
+
+fetch ("http://127.0.0.1:8000/municipios")
+.then(res => res.json())
+.then(data =>{
+    const selector = document.getElementById("selector-municipio");
+    data.municipios.forEach(municipio => {
+        const option =document.createElement("option");
+        option.value =municipio
+        option.textContent =municipio
+        selector.appendChild(option);
     })
+  
+
     
- 
+    selector.addEventListener("change",function(){
+        
+        fetch("http://127.0.0.1:8000/produccion/" + selector.value)
+        .then(res => res.json())
+        .then(data =>{
+            window.datosActuales = data
+            mostrarResultados(data)
+   
+        
+    })
 
+    })
 
-
-})
-})
+    })
+      document.getElementById("selector-cultivo").addEventListener("change", function() {
+    const cultivoSeleccionado = this.value
+    const datosFiltrados = cultivoSeleccionado
+        ? window.datosActuales.filter(r => r.Cultivo === cultivoSeleccionado)
+        : window.datosActuales
+    
+    mostrarResultados(datosFiltrados)
+      })
