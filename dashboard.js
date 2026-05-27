@@ -1,5 +1,6 @@
         function mostrarResultados(data){
-                         const tabla=document.createElement("table");
+            const cultivoSeleccionado = document.getElementById("selector-cultivo").value
+            const tabla=document.createElement("table");
             const encabezado = document.createElement("tr");
             const th1 = document.createElement("th");
             th1.textContent = "Cultivo";
@@ -27,7 +28,7 @@
 
             document.getElementById("resultados").innerHTML = ""
             document.getElementById("resultados").appendChild(tabla)
-            const cultivos=[...new Set(data.map(r => r.Cultivo))]
+            const cultivos = [...new Set((window.datosActuales || data).map(r => r.Cultivo))]
             const años=[...new Set(data.map(r => r.Año))]
             const dataset = cultivos.map(cultivo => {
                 return {
@@ -52,6 +53,8 @@
     option.textContent = cultivo
     selectorCultivo.appendChild(option)
 })
+selectorCultivo.value = cultivoSeleccionado || ""
+
             }
 
 fetch ("http://127.0.0.1:8000/municipios")
@@ -81,11 +84,11 @@ fetch ("http://127.0.0.1:8000/municipios")
     })
 
     })
-      document.getElementById("selector-cultivo").addEventListener("change", function() {
+  document.getElementById("selector-cultivo").addEventListener("change", function() {
     const cultivoSeleccionado = this.value
     const datosFiltrados = cultivoSeleccionado
         ? window.datosActuales.filter(r => r.Cultivo === cultivoSeleccionado)
         : window.datosActuales
-    
     mostrarResultados(datosFiltrados)
-      })
+})
+   
