@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contáctanos - ColConfianza</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="img/logoCol.jpeg" alt="ColConfianza">
+        </a>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="about.html">Nosotros</a></li>
+            <li><a href="dashboard.html">Datos</a></li>
+        </ul>
+        <a class="btn-cta" href="contact.html">Contactos</a>
+    </nav>
+
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-left">
+                <h2>Aliado para crecer con nosotros!</h2>
+                <p>Comparte tus datos y nuestro equipo te contactará para apoyarte en tus proyectos agrícolas.</p>
+                <div class="contact-info-item">
+                    <span>📞</span>
+                    <p>+57 300 000 0000</p>
+                </div>
+                <div class="contact-info-item">
+                    <span>✉️</span>
+                    <p>contacto@colconfianza.com</p>
+                </div>
+                <div class="contact-socials">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                </div>
+            </div>
+
+            <div class="contact-right">
+                <div class="contact-card">
+                    <h3>Envíanos tu mensaje</h3>
+                    <form id="contact-form">
+                        <div class="grid-two">
+                            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                            <input type="email" id="email" name="email" placeholder="email Electrónico" required>
+                        </div>
+                        <input type="text" id="telefono" name="telefono" placeholder="Teléfono" required>
+                        <textarea id="mensaje" name="mensaje" rows="6" placeholder="Mensaje" required></textarea>
+                        <button type="submit" class="btn-cta">Enviar</button>
+                        <p id="form-message" class="form-message"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const form = document.getElementById('contact-form');
+        const messageEl = document.getElementById('form-message');
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            messageEl.textContent = '';
+
+            const payload = {
+                nombre: document.getElementById('nombre').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                telefono: document.getElementById('telefono').value.trim(),
+                mensaje: document.getElementById('mensaje').value.trim()
+            };
+
+            try {
+                // ... dentro del evento submit ...
+                const response = await fetch('guardar.php', { // RUTA RELATIVA
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    messageEl.textContent = 'Error al guardar el contacto: ' + (result.detail || result.message || response.statusText);
+                    messageEl.style.color = '#d00000';
+                    return;
+                }
+
+                form.reset();
+                messageEl.textContent = 'Contacto guardado correctamente.';
+                messageEl.style.color = '#1f7a1f';
+            } catch (error) {
+                messageEl.textContent = 'No se pudo conectar con el servidor. Revisa que el backend esté activo.';
+                messageEl.style.color = '#d00000';
+            }
+        });
+    </script>
+
+</body>
+</html>

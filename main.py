@@ -1,5 +1,9 @@
 
 from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+import mysql.connector
+import os
 import pandas as pd
 from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
@@ -34,4 +38,36 @@ def produccion_nombre (municipio: str):
 def cultivos_nombre (nombre :str):
    resultado=df[df["Cultivo"]==nombre].groupby(["Municipio", "Año"])["Producción"].sum().reset_index()
    return resultado.to_dict(orient="records")
+    
+
+class Contacto(BaseModel):
+    nombre: str
+    correo: str
+    telefono: str
+    mensaje: str
+
+
+def get_db_connection():
+    return mysql.connector.connect(
+        host=os.getenv('DB_HOST', 'localhost'),
+        user=os.getenv('DB_USER', 'root'),
+        password=os.getenv('DB_PASS', ''),
+        database=os.getenv('DB_NAME', 'colconfianza_db')
+    )
+
+@app.post('/contactos')
+def crear_contacto(contacto: Contacto):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO contactos (nombre, correo, telefono, mensaje) VALUES (%s, %s, %s, %s)',
+            (contacto.nombre, contacto.correo, contacto.telefono, contacto.mensaje)
+        )
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return {'status': 'ok', 'message': 'Contacto guardado correctamente'}
+    except mysql.connector.Error as error:
+        raise HTTPException(status_code=500, detail=f'Error al guardar contacto: {error}')
     
