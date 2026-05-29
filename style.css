@@ -267,3 +267,203 @@ padding: 20px;
         grid-template-columns: 1fr;
     }
 }
+.plagas-section {
+    padding: 40px 6vw;
+}
+
+.plagas-section h2 {
+    color: #0d1f2d;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.plagas-section p {
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.plagas-form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    align-items: center;
+}
+
+.plagas-form select {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.plagas-form button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.plaga-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border-left: 4px solid #cc0000;
+}
+
+.plaga-card h4 {
+    color: #cc0000;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.plaga-card h5 {
+    color: #0d1f2d;
+    margin: 12px 0 8px;
+}
+
+.plaga-card p {
+    color: #444;
+    margin: 4px 0;
+    font-size: 0.95rem;
+}
+
+#resultado-plagas > p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+.calendario-section {
+    padding: 40px 6vw;
+}
+
+.calendario-form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    align-items: center;
+}
+
+.calendario-form select {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.calendario-form button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.calendario-header {
+    background-color: #1a4a1a;
+    color: white;
+    padding: 20px;
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 0;
+}
+
+.calendario-header h3 {
+    font-size: 1.2rem;
+    margin: 0 0 4px;
+}
+
+.calendario-header p {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.meses-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 0 0 12px 12px;
+    margin-bottom: 12px;
+}
+
+.mes-card {
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+    background: #f0f0f0;
+}
+
+.mes-card.siembra {
+    background: #e8f5e9;
+    border: 1.5px solid #4caf50;
+}
+
+.mes-card.cosecha {
+    background: #fff3e0;
+    border: 1.5px solid #ff9800;
+}
+
+.mes-card.descanso {
+    background: #f5f5f5;
+    border: 1.5px solid #ccc;
+}
+
+.mes-nombre {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.mes-emoji {
+    font-size: 1.3rem;
+}
+
+.calendario-leyenda {
+    display: flex;
+    gap: 20px;
+    padding: 12px 0;
+    font-size: 0.9rem;
+}
+
+.leyenda-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.recomendacion-card {
+    background: #e8f5e9;
+    border: 1.5px solid #4caf50;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 0.95rem;
+    color: #1a4a1a;
+}
+
+.recomendacion-card strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 1rem;
+}

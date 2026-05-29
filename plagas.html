@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alertas de Plagas - ColConfianza</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="img/logoCol.jpeg" alt="ColConfianza">
+        </a>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="about.html">Nosotros</a></li>
+            <li><a href="dashboard.html">Datos</a></li>
+            <li><a href="plagas.html">Plagas</a></li>
+        </ul>
+        <a class="btn-cta" href="contact.html">Contáctanos</a>
+    </nav>
+
+
+    
+        <div class="plagas-form">
+            <select id="selector-municipio-plaga">
+    <option value="">Selecciona tu municipio</option>
+    <option value="Chocontá">Chocontá</option>
+    <option value="Machetá">Machetá</option>
+    <option value="Manta">Manta</option>
+    <option value="Sesquilé">Sesquilé</option>
+    <option value="Suesca">Suesca</option>
+    <option value="Tibirita">Tibirita</option>
+    <option value="Villapinzón">Villapinzón</option>
+</select>
+            
+            <select id="selector-cultivo-plaga">
+                <option value="">Selecciona un cultivo</option>
+                <option value="Papa">Papa</option>
+                <option value="Arveja">Arveja</option>
+            </select>
+
+         
+            <button id="btn-analizar">Analizar riesgo</button>
+        </div>
+
+        <div id="resultado-plagas"></div>
+    </section>
+
+    <script src="plagas.js"></script>
+</body>
+</html>

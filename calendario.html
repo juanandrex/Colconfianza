@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Siembra - ColConfianza</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="img/logoCol.jpeg" alt="ColConfianza">
+        </a>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="about.html">Nosotros</a></li>
+            <li><a href="dashboard.html">Datos</a></li>
+            <li><a href="plagas.html">Plagas</a></li>
+            <li><a href="calendario.html">Calendario</a></li>
+        </ul>
+        <a class="btn-cta" href="contact.html">Contáctanos</a>
+    </nav>
+
+    <section class="calendario-section">
+        <h2>Calendario de siembra</h2>
+        <p>Basado en datos históricos de producción 2019–2024</p>
+
+        <div class="calendario-form">
+            <select id="selector-municipio-cal">
+                <option value="">Selecciona un municipio</option>
+                <option value="Chocontá">Chocontá</option>
+                <option value="Machetá">Machetá</option>
+                <option value="Manta">Manta</option>
+                <option value="Sesquilé">Sesquilé</option>
+                <option value="Suesca">Suesca</option>
+                <option value="Tibirita">Tibirita</option>
+                <option value="Villapinzón">Villapinzón</option>
+            </select>
+
+            <select id="selector-cultivo-cal">
+                <option value="">Selecciona un cultivo</option>
+                <option value="Papa">Papa</option>
+                <option value="Arveja">Arveja</option>
+            </select>
+
+            <button id="btn-calendario">Ver calendario</button>
+        </div>
+
+        <div id="resultado-calendario"></div>
+    </section>
+
+    <script src="calendario.js"></script>
+</body>
+</html>

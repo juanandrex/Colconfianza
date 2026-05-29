@@ -1,5 +1,5 @@
 
-
+from plagas import PLAGAS
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import mysql.connector
@@ -39,7 +39,7 @@ def cultivos_nombre (nombre :str):
    resultado=df[df["Cultivo"]==nombre].groupby(["Municipio", "Año"])["Producción"].sum().reset_index()
    return resultado.to_dict(orient="records")
     
-
+# Endpoint bases de datos
 class Contacto(BaseModel):
     nombre: str
     correo: str
@@ -71,3 +71,27 @@ def crear_contacto(contacto: Contacto):
     except mysql.connector.Error as error:
         raise HTTPException(status_code=500, detail=f'Error al guardar contacto: {error}')
     
+# Endpoint plagas
+@app.get("/plagas/{cultivo}")
+def obtener_plagas(cultivo: str):
+    if cultivo not in PLAGAS:
+        raise HTTPException(status_code=404, detail="Cultivo no encontrado")
+    return PLAGAS[cultivo]
+
+#Endpoint de deteccion de riesgos
+@app.get("/riesgos/{cultivo}")
+def calcular_riesgo (cultivo: str, temperatura: float, humedad: float):
+    if cultivo not in PLAGAS:
+        raise HTTPException(status_code=404, detail="Cultivo no encontrado")
+    riesgos = []
+    for plaga in PLAGAS[cultivo]:
+        condiciones = plaga["condiciones"]
+        if (condiciones["temp_min"] <= temperatura <= condiciones["temp_max"] and
+            humedad >= condiciones["humedad_min"]):
+            riesgos.append(plaga["nombre"])
+    return {"cultivo": cultivo, "temperatura":temperatura, "humedad":humedad,"riesgos":riesgos}
+#Endpoint calendario 
+@app.get("/calendario/{cultivo}")
+def calendario(cultivo: str):
+    datos = df[df["Cultivo"] == cultivo].groupby(["Municipio", "Año"])["Producción"].sum().reset_index()
+    return datos.to_dict(orient="records")
