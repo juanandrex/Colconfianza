@@ -1,4 +1,7 @@
-        function mostrarResultados(data){
+      function mostrarResultados(data, cultivoFiltrado = ""){
+         console.log("cultivoFiltrado recibido:", cultivoFiltrado)
+        
+            document.getElementById("seccion-demanda").style.display = "none"
             const cultivoSeleccionado = document.getElementById("selector-cultivo").value
             const tabla=document.createElement("table");
             const encabezado = document.createElement("tr");
@@ -44,6 +47,7 @@
             window.graficaActual = new Chart(ctx, {
                 type: "line",
                 data: {labels: años, datasets: dataset}
+
         })
         const selectorCultivo = document.getElementById("selector-cultivo")
     selectorCultivo.innerHTML = '<option value="">Selecciona un cultivo</option>'
@@ -54,6 +58,39 @@
     selectorCultivo.appendChild(option)
 })
 selectorCultivo.value = cultivoSeleccionado || ""
+const municipioActual = document.getElementById("selector-municipio").value
+const cultivoActual = cultivoFiltrado
+console.log("cultivoActual:", cultivoActual)
+console.log("cultivoActual:", cultivoActual)
+console.log("entrando al if:", cultivoActual === "Papa" || cultivoActual === "Arveja")
+if (cultivoActual === "Papa" || cultivoActual === "Arveja") {
+    fetch(`http://127.0.0.1:8000/demanda/${municipioActual}/${cultivoActual}`)
+    .then(res => res.json())
+    .then(demanda => {
+        document.getElementById("seccion-demanda").style.display = "block"
+        const div = document.getElementById("resultado-demanda")
+      div.innerHTML = `
+    <div class="demanda-area">
+        <span>📐 Área estimada para 2026:</span>
+        <strong>${demanda.area_predicha_2026} ha</strong>
+    </div>
+    <div class="productos-grid">
+        ${Object.entries(demanda.demanda_estimada).map(([producto, cantidad]) => `
+            <div class="producto-card">
+                <span class="producto-nombre">${producto}</span>
+                <span class="producto-cantidad">${cantidad}</span>
+                <span class="producto-unidad">litros estimados</span>
+            </div>
+        `).join("")}
+    </div>
+`
+    })
+}
+else {
+    document.getElementById("seccion-demanda").style.display = "none"
+    document.getElementById("resultado-demanda").innerHTML = ""
+}
+
 
             }
 
@@ -76,7 +113,7 @@ fetch ("http://127.0.0.1:8000/municipios")
         .then(res => res.json())
         .then(data =>{
             window.datosActuales = data
-            mostrarResultados(data)
+            mostrarResultados(data, "")
    
         
     })
@@ -89,6 +126,7 @@ fetch ("http://127.0.0.1:8000/municipios")
     const datosFiltrados = cultivoSeleccionado
         ? window.datosActuales.filter(r => r.Cultivo === cultivoSeleccionado)
         : window.datosActuales
-    mostrarResultados(datosFiltrados)
+    mostrarResultados(datosFiltrados, cultivoSeleccionado)
+
 })
    

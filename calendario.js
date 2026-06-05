@@ -46,7 +46,7 @@ document.getElementById("btn-calendario").addEventListener("click", function() {
         <div class="calendario-leyenda">
                 <span>🌱 Sembrar</span>
                 <span>⚒️ Cosechar</span>
-                <span>💤 Descanso</span>
+                <span>💤 No siembra</span>
             </div>
         <div class="recomendacion-card">
                 <strong>⏰ Ahora: ${cal.siembra.includes(new Date().getMonth()) ? "buen momento para sembrar" : cal.cosecha.includes(new Date().getMonth()) ? "tiempo de cosecha" : "período de descanso"}</strong>

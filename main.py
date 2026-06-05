@@ -1,4 +1,4 @@
-
+from prediccion import predecir_demanda
 from plagas import PLAGAS
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -18,8 +18,7 @@ app.add_middleware(
 
 df= pd.read_csv ("Evaluaciones_Agropecuarias_Municipales__EVA._2019_-_2024._Base_Agrícola_20260520.csv")
 for col in ["Área sembrada", "Área cosechada", "Producción", "Rendimiento"]:
-    df[col] = pd.to_numeric (df [col].astype (str).str.replace (",", "."), errors="coerce")
-@app.get("/")
+     df[col] = pd.to_numeric(df[col].astype(str).str.replace(".", "", regex=False).str.replace(",", ".", regex=False), errors="coerce")
 def root ():
     return { "mensaje": "API ColConfianza activa"}
 @app.get("/produccion")
@@ -95,3 +94,10 @@ def calcular_riesgo (cultivo: str, temperatura: float, humedad: float):
 def calendario(cultivo: str):
     datos = df[df["Cultivo"] == cultivo].groupby(["Municipio", "Año"])["Producción"].sum().reset_index()
     return datos.to_dict(orient="records")
+@app.get("/demanda/{municipio}/{cultivo}")
+
+def demanda_agroinsumos(municipio: str, cultivo: str):
+    resultado = predecir_demanda(municipio, cultivo)
+    if resultado is None:
+        raise HTTPException(status_code=404, detail="No hay datos para ese municipio y cultivo")
+    return resultado
